@@ -1,0 +1,109 @@
+Original ---------------------------------------------------------
+ 
+public void ProcessOrder(Order order) 
+{
+    // Validate order
+    if (order == null) throw new ArgumentNullException();
+    if (order.Items.Count == 0) throw new InvalidOperationException("Empty order");
+    // Calculate total
+    decimal total = 0;
+    foreach (var item in order.Items) 
+    {
+        total += item.Price * item.Quantity;
+        if (item.IsTaxable) 
+        {
+            total += item.Price * 0.1m; // 10% tax
+        }
+    }
+ 
+    // Apply discount
+    if (order.Customer.IsPremium) 
+    {
+        total *= 0.9m; // 10% discount
+    }
+ 
+    // Save to DB
+    using (var db = new AppDbContext()) 
+    {
+        order.Total = total;
+        db.Orders.Add(order);
+        db.SaveChanges();
+    }
+ 
+    // Send confirmation email
+    var emailService = new EmailService();
+    emailService.Send(order.Customer.Email, "Order Confirmed", $"Total: ${total}");
+}
+ 
+ 
+### Refactored---------------------------------------------------------------------------------------------------------
+ 
+// 1. Broke down the large method into smaller, focused methods following Single Responsibility Principle
+// 2. Extracted magic numbers into named constants for better maintainability
+// 3. Added proper parameter validation with descriptive error messages
+// 4. Fixed tax calculation to apply to the full item amount
+// 5. Improved method naming to clearly indicate purpose
+// 6. Added dependency injection for EmailService to reduce coupling
+// 7. Made the code more testable by separating concerns
+ 
+public void ProcessOrder(Order order, IEmailService emailService) 
+{
+    ValidateOrder(order);
+    decimal total = CalculateOrderTotal(order);
+    SaveOrderToDatabase(order, total);
+    SendConfirmationEmail(emailService, order.Customer.Email, total);
+}
+ 
+private void ValidateOrder(Order order)
+{
+    if (order == null) throw new ArgumentNullException(nameof(order));
+    if (order.Items.Count == 0) throw new InvalidOperationException("Empty order");
+}
+ 
+private decimal CalculateOrderTotal(Order order)
+{
+    decimal total = CalculateItemsTotal(order.Items);
+    if (order.Customer.IsPremium) 
+    {
+        total = ApplyPremiumDiscount(total);
+    }
+    return total;
+}
+ 
+private decimal CalculateItemsTotal(IEnumerable<OrderItem> items)
+{
+    const decimal TaxRate = 0.1m; // 10% tax
+    decimal total = 0;
+    foreach (var item in items) 
+    {
+        decimal itemTotal = item.Price * item.Quantity;
+        total += itemTotal;
+        if (item.IsTaxable) 
+        {
+            total += itemTotal * TaxRate;
+        }
+    }
+    return total;
+}
+ 
+private decimal ApplyPremiumDiscount(decimal total)
+{
+    const decimal DiscountRate = 0.9m; // 10% discount
+    return total * DiscountRate;
+}
+ 
+private void SaveOrderToDatabase(Order order, decimal total)
+{
+    order.Total = total;
+    using (var db = new AppDbContext()) 
+    {
+        db.Orders.Add(order);
+        db.SaveChanges();
+    }
+}
+ 
+private void SendConfirmationEmail(IEmailService emailService, string email, decimal total)
+{
+    emailService.Send(email, "Order Confirmed", $"Total: ${total}");
+}
+```

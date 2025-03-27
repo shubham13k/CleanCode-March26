@@ -1,0 +1,353 @@
+#----------------------------------------------------------------
+##Review 1: IsShopOpen Method
+ 
+#Original Code
+
+public bool IsShopOpen(string day)
+
+{
+
+    if (!string.IsNullOrEmpty(day))
+
+    {
+
+        day = day.ToLower();
+
+        if (day == "friday")
+
+        {
+
+            return true;
+
+        }
+
+        else if (day == "saturday")
+
+        {
+
+            return true;
+
+        }
+
+        else if (day == "sunday")
+
+        {
+
+            return true;
+
+        }
+
+        else
+
+        {
+
+            return false;
+
+        }
+
+    }
+
+    else
+
+    {
+
+        return false;
+
+    }
+
+}
+ 
+#Problem
+
+	• High cognitive complexity due to nested conditionals
+
+	• Multiple repeated return true statements
+
+	• Chain of if-else statements that could be simplified
+
+	• Deep nesting makes the code hard to follow
+ 
+#Fix
+
+public bool IsShopOpen(string day)
+
+{
+
+    // Early return for invalid input
+
+    if (string.IsNullOrEmpty(day))
+
+    {
+
+        return false;
+
+    }
+
+    // Use a collection to check valid days
+
+    var openDays = new[] { "friday", "saturday", "sunday" };
+
+    return openDays.Contains(day.ToLower());
+
+}
+ 
+#----------------------------------------------------------------------
+
+##Review 3: Fibonacci Method
+
+Original Code
+
+public long Fibonacci(int n)
+
+{
+
+    if (n < 50)
+
+    {
+
+        if (n != 0)
+
+        {
+
+            if (n != 1)
+
+            {
+
+                return Fibonacci(n - 1) + Fibonacci(n - 2);
+
+            }
+
+            else
+
+            {
+
+                return 1;
+
+            }
+
+        }
+
+        else
+
+        {
+
+            return 0;
+
+        }
+
+    }
+
+    else
+
+    {
+
+        throw new System.Exception("Not supported");
+
+    }
+
+}
+ 
+#Problem
+
+	• Extremely high cognitive complexity with deeply nested conditionals
+
+	• Recursive calls add additional complexity
+
+	• Negative logic (n != 0, n != 1) is harder to follow than positive logic
+
+	• Deep nesting makes the code very difficult to understand
+ 
+#Fix
+
+public long Fibonacci(int n)
+
+{
+
+    // Early validation
+
+    if (n >= 50)
+
+    {
+
+        throw new System.Exception("Not supported");
+
+    }
+
+    // Base cases with early returns
+
+    if (n == 0) return 0;
+
+    if (n == 1) return 1;
+
+    // Recursive case
+
+    return Fibonacci(n - 1) + Fibonacci(n - 2);
+
+}
+
+#--------------------------------------------------------------------------------
+
+##Review 4: City List Processing
+ 
+#Original Code
+
+var l = new[] { "Austin", "New York", "San Francisco" };
+
+for (var i = 0; i < l.Count(); i++)
+
+{
+
+    var li = l[i];
+
+    DoStuff();
+
+    DoSomeOtherStuff();
+
+// ...
+
+    // ...
+
+    // ...
+
+    // Wait, what is `li` for again?
+
+    Dispatch(li);
+
+}
+ 
+#Problem
+
+	• Poor variable naming (l, li) makes code hard to understand
+
+	• Large gap between variable declaration and usage creates confusion
+
+	• Using index-based iteration when direct iteration would be clearer
+
+	• Comment indicates the code is confusing even to its author
+ 
+#Fix
+
+var cities = new[] { "Austin", "New York", "San Francisco" };
+
+foreach (var city in cities)
+
+{
+
+    DoStuff();
+
+    DoSomeOtherStuff();
+
+    // Process each city
+
+    Dispatch(city);
+
+}
+
+#-----------------------------------------------------------------------------
+
+##Review 5: Admin Role Check
+ 
+#Original Code
+
+if (userRole == 8) // Check if Admin 
+
+{
+
+}
+ 
+#Problem
+
+	• Magic number (8) with only a comment explaining its meaning
+
+	• Hard to maintain if role codes change
+
+	• Violates clean code principles for magic numbers
+ 
+#Fix
+
+const int AdminRoleId = 8;
+
+if (userRole == AdminRoleId)
+
+{
+
+    // Admin-specific logic
+
+}
+
+#----------------------------------------------------------------------------------
+
+##Review 6: Car Class Properties
+ 
+#Original Code
+
+public class Car
+
+{
+
+    public string CarMake { get; set; }
+
+    public string CarModel { get; set; }
+
+    public string CarColor { get; set; }
+
+//...
+
+}
+ 
+#Problem
+
+	• Redundant class name prefix in property names
+
+	• Properties should be named based on their meaning, not the class they belong to
+ 
+#Fix
+
+public class Car
+
+{
+
+    public string Make { get; set; }
+
+    public string Model { get; set; }
+
+    public string Color { get; set; }
+
+//...
+
+}
+
+#------------------------------------------------------------------------------------------
+
+##Review 9: CreateMicrobrewery Method
+ 
+#Original Code
+
+public void CreateMicrobrewery(string name = null)
+
+{
+
+    var breweryName = !string.IsNullOrEmpty(name) ? name : "Hipster Brew Co.";
+
+    // ...
+
+}
+ 
+#Problem
+
+	• Using null as default parameter value instead of a more explicit approach
+
+	• Method uses negation in the conditional which slightly increases cognitive load
+ 
+#Fix
+
+public void CreateMicrobrewery(string name = "Hipster Brew Co.")
+
+{
+
+    var breweryName = name;
+
+    // ...
+
+}
+ 

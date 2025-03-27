@@ -1,0 +1,90 @@
+
+//review2
+public void ComputeDiscountOnTotalAmount(Order order, decimal discountAmount)  
+{  
+    // Fix: Method name should be more concise (e.g., ApplyDiscount).  
+    // Fix: Property 'total' should follow PascalCase if it's public (Total).  
+    // Fix: Use shorthand (order.Total -= discountAmount;).  
+    // Fix: Method return type is void, but it's returning a value (remove return statement or change return type).  
+ 
+    order.total = order.total - discountAmount;  
+ 
+    return order.total;  
+}
+
+
+//review3
+public bool IsDOMNodeNotPresent(string node)  
+{  
+    // Fix: Method name could be clearer – consider renaming to 'IsNodeMissing' to reduce negative logic  
+    // Fix: 'node' parameter name could be more descriptive, e.g., 'nodeId'  
+    // ...
+}  
+ 
+if (!IsDOMNodeNotPresent(node))  
+{  
+    // Fix: Double negative reduces readability – consider inverting method logic  
+    // Instead of checking '!IsDOMNodeNotPresent(node)', use 'IsDOMNodePresent(node)'  
+    // ...
+}
+
+
+//review5
+public Path TravelToTexas(object vehicle)
+{
+    // Fix: Method return type is 'Path', but there is no return statement.
+    // Fix: Using 'GetType()' for type checking is not ideal; prefer 'is' for better readability.
+    // Fix: Use direct casting instead of 'as' when we are sure of the type.
+    // Fix: 'PeddleTo' might be a typo; should be 'PedalTo' if referring to a bicycle.
+    // Fix: Strings like "texas" should follow proper casing (e.g., "Texas").
+    // Fix: Reduce cognitive complexity by using polymorphism instead of explicit type checks.
+ 
+    if (vehicle is Bicycle bike)
+    {
+        bike.PeddleTo(new Location("Texas"));
+    }
+    else if (vehicle is Car car)
+    {
+        car.DriveTo(new Location("Texas"));
+    }
+ 
+    // Fix: Ensure the method returns a 'Path' object as expected.
+}
+
+
+//review6
+public void CreateFile(string name, bool temp = false)
+{
+    // Fix: Method name should be more descriptive (e.g., CreateOrTempFile).  
+    // Fix: String concatenation should use Path.Combine for proper path handling.  
+    // Fix: Magic string "./temp/" should be replaced with a constant or configurable path.  
+    // Fix: Reduce cognitive complexity by inlining the conditional expression.  
+    // Fix: Ensure 'Touch' method handles errors if the path is invalid.  
+ 
+    if (temp)
+    {
+        Touch("./temp/" + name); // Use Path.Combine("temp", name)
+    }
+    else
+    {
+        Touch(name);
+    }
+}
+
+
+
+//review8
+public void CreateMenu(string title, string body, string buttonText, bool cancellable)
+{
+    // Fix: Method name could be more descriptive (e.g., ShowMenu or DisplayMenu).  
+    // Fix: Parameter names should follow consistent casing; 'cancellable' should be 'isCancellable' for clarity.  
+    // Fix: If 'title', 'body', or 'buttonText' can be null, consider adding null checks.  
+    // Fix: Consider using an options object if more parameters are expected in the future to improve readability.  
+}
+
+
+
+
+
+
+

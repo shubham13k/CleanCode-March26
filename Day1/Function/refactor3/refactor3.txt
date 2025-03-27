@@ -1,0 +1,168 @@
+// KEY CHANGES:
+
+// 1. Removed unnecessary layers (EmployeeRepository) as it was just a pass-through
+
+// 2. Fixed compilation errors in GetEmployee and DeleteEmployee (emp.ID references)
+
+// 3. Moved validation logic to a separate method for better organization
+
+// 4. Extracted magic numbers and strings to constants
+
+// 5. Made method names consistent across the codebase
+
+// 6. Improved error messages and added more context to exceptions
+
+// 7. Simplified the overall architecture by removing redundant abstraction
+ 
+public class EmployeeDatabase 
+
+{
+
+    private readonly IDbConnection _db;
+
+    // Extracted magic numbers to constants
+
+    private const int MIN_EMPLOYEE_ID = 50;
+
+    private const int CHAIRMAN_ID = 1;
+
+    private const int MAX_NAME_LENGTH = 150;
+ 
+    public EmployeeDatabase(IDbConnection dbConnection) 
+
+    {
+
+        _db = dbConnection ?? throw new ArgumentNullException(nameof(dbConnection));
+
+    }
+ 
+    public Employee GetEmployee(int id) 
+
+    {
+
+        // Fixed: Changed emp.ID to id since emp doesn't exist here
+
+        ValidateEmployeeId(id);
+ 
+        Employee employee = _db.QueryFirstOrDefault<Employee>(
+
+            "SELECT * FROM Employees WHERE Id = @Id", 
+
+            new { Id = id });
+ 
+        return employee;
+
+    }
+ 
+    public void SaveEmployee(Employee emp) 
+
+    {
+
+        if (emp == null)
+
+            throw new ArgumentNullException(nameof(emp));
+
+        ValidateEmployeeName(emp.Name);
+ 
+        _db.Execute(
+
+            "UPDATE Employees SET Name = @Name WHERE Id = @Id", 
+
+            new { emp.Name, emp.Id });
+
+    }
+ 
+    public void DeleteEmployee(int id) 
+
+    {
+
+        // Fixed: Changed emp.ID to id since emp doesn't exist here
+
+        if (id == CHAIRMAN_ID)
+
+            throw new InvalidOperationException("Chairman cannot be removed from the system");
+ 
+        _db.Execute(
+
+            "DELETE FROM Employees WHERE Id = @Id", 
+
+            new { Id = id });
+
+    }
+
+    // Extracted validation logic to separate methods
+
+    private void ValidateEmployeeId(int id)
+
+    {
+
+        if (id < MIN_EMPLOYEE_ID)
+
+            throw new InvalidOperationException(
+
+                $"Employee ID must be {MIN_EMPLOYEE_ID} or higher. IDs below {MIN_EMPLOYEE_ID} are reserved for promoters and investors.");
+
+    }
+
+    private void ValidateEmployeeName(string name)
+
+    {
+
+        if (string.IsNullOrEmpty(name))
+
+            throw new ArgumentException("Employee name cannot be empty", nameof(name));
+
+        if (name.Length > MAX_NAME_LENGTH)
+
+            throw new InvalidOperationException($"Employee name cannot exceed {MAX_NAME_LENGTH} characters");
+
+    }
+
+}
+ 
+// Removed EmployeeRepository completely as it was just passing through to EmployeeDatabase
+ 
+public class EmployeeService 
+
+{
+
+    private readonly EmployeeDatabase _db;
+ 
+    public EmployeeService(EmployeeDatabase db) 
+
+    {
+
+        _db = db ?? throw new ArgumentNullException(nameof(db));
+
+    }
+ 
+    public Employee GetEmployee(int id) 
+
+    {
+
+        return _db.GetEmployee(id);
+
+    }
+ 
+    public void SaveEmployee(Employee emp) 
+
+    {
+
+        if (emp == null)
+
+            throw new ArgumentNullException(nameof(emp));
+
+        _db.SaveEmployee(emp);
+
+    }
+ 
+    public void DeleteEmployee(int id) 
+
+    {
+
+        _db.DeleteEmployee(id);
+
+    }
+
+}
+ 

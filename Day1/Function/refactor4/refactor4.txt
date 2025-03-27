@@ -1,0 +1,77 @@
+public class PatientVitalsService
+{
+    public void RecordVitals(
+        int patientId,
+        double temperature,
+        int systolic,
+        int diastolic,
+        int heartRate,
+        string bloodType,
+        int age,    
+        DateTime lastMealTime)
+    {
+        ValidateTemperature(temperature);
+        ValidateBloodPressure(systolic, diastolic);
+        ValidateHeartRate(heartRate, age);
+        ValidateBloodType(bloodType);
+        CheckPostprandialBloodPressure(diastolic, lastMealTime);
+    }
+ 
+    private void ValidateTemperature(double temperature)
+    {
+        if (temperature < 34 || temperature > 42)
+            throw new ArgumentException("Invalid temperature");
+    }
+ 
+    private void ValidateBloodPressure(int systolic, int diastolic)
+    {
+        if (systolic < 70 || systolic > 200)
+            throw new ArgumentException("Invalid systolic BP");
+        if (diastolic < 40 || diastolic > 120)
+            throw new ArgumentException("Invalid diastolic BP");
+        if (diastolic > systolic)
+            throw new ArgumentException("Diastolic cannot exceed systolic");
+    }
+ 
+    private void ValidateHeartRate(int heartRate, int age)
+    {
+        int maxHeartRate = 220 - age;
+        if (heartRate < 40 || heartRate > maxHeartRate * 1.2)
+            throw new ArgumentException($"Heart rate invalid for age {age}");
+    }
+ 
+    private void ValidateBloodType(string bloodType)
+    {
+        if (!new[] {"A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"}.Contains(bloodType))
+            throw new ArgumentException("Invalid blood type");
+    }
+ 
+    private void CheckPostprandialBloodPressure(int diastolic, DateTime lastMealTime)
+    {
+        if ((DateTime.Now - lastMealTime).TotalHours < 2 && diastolic > 90)
+            TriggerAlert("Elevated postprandial blood pressure");
+    }
+ 
+    private void TriggerAlert(string message)
+    {
+        // Implementation for triggering an alert
+    }
+} 
+ 
+To refactor this code, we can break down the validation logic into separate methods to improve readability and maintainability. Here's a refactored version of the PatientVitalsService class
+ 
+Approaches to Further Improvement
+Extract Domain Classes - Create proper domain classes for each vital type to avoid primitive obsession:
+Temperature class with validation
+BloodPressure class combining systolic and diastolic
+HeartRate class with age-specific validation
+BloodType class with valid type checking
+Use Constants - Replace magic numbers with named constants for better maintainability:
+Min/max temperature boundaries
+Blood pressure thresholds
+Minimum heart rate
+Create Value Objects - Use immutable value objects with self-validation to ensure data integrity
+Improve Exception Handling - Provide more specific exceptions with detailed error messages
+Add Parameter Validation - Validate nulls and other invalid input before processing
+Your refactoring significantly improved the code by breaking down the large method, but further improvements could move from "procedural validation" to a true domain model with proper encapsulation.
+ 
