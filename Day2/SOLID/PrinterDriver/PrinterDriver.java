@@ -1,56 +1,70 @@
-public class PrinterDriver
-{
-    private Printer _printer;
-    private File _file;
-    private Scanner _scanner;
-    private Fax _fax;
+public class PrinterDriver {
+    private Printer printer;
+    private IInputDevice device; 
 
-    public PrinterDriver(File file, Printer printer)
-    {
-        _file = file;
-        _printer = printer;
-        _scanner = null;
-        _fax = null;
+    public PrinterDriver(Printer printer, IInputDevice device) {
+        this.printer = printer;
+        this.device = device;
     }
 
-    public PrinterDriver(Scanner scanner, Printer printer)
-    {
-        _file = null;
-        _printer = printer;
-        _scanner = scanner;
-        _fax = null;
-    }
-
-    public PrinterDriver(Fax fax, Printer printer)
-    {
-        _file = null;
-        _printer = printer;
-        _scanner = null;
-        _fax = fax;
-    }
-
-    public void Print()
-    {
-        if(this._file != null) {
-            buffer page = _file.Read();
-            while(page != null) {
-                _printer.Print(page);
-                page = _file.Read();
-            }
-        } 
-        else if(this._scanner != null) {
-            buffer page = _scanner.Scan();
-            while(page != null) {
-                _printer.Print(page);
-                page = _scanner.Scan();
-            }
-        } 
-        else {
-            buffer page = _fax.Receive();
-            while(page != null) {
-                _printer.Print(page);
-                page = _fax.Receive();
-            }
+    public void Print() {
+        while(device.IsEndOfData() == false) {
+            printer.Print(device.ReadPage());
         }
+    }
+}
+
+public interface IInputDevice {
+    public buffer ReadPage();
+    public bool IsEndOfData();
+}
+
+public class File : IInputDevice {
+    private string path;
+    private StreamReader reader;
+
+    public File(string path) {
+        this.path = path;
+        reader = new StreamReader(path);
+    }
+
+    public override buffer ReadPage() {
+        return reader.ReadLine();
+    }
+
+    public override bool IsEndOfData() {
+        return reader.EndOfStream;
+    }
+}
+
+public class ScannerService : IInputDevice {
+    private Scanner scanner;
+
+    public ScannerService() {
+        scanner = new Scanner();
+    }
+
+    public override buffer ReadPage() {
+        return scanner.Scan();
+    }
+
+    public override bool IsEndOfData() {
+        return scanner.IsEndOfData();
+    }
+}
+
+public class FaxService : IInputDevice {
+    private Fax fax;
+
+    public FaxService() {
+        fax = new Fax();
+    }
+
+    public override buffer ReadPage() {
+        return fax.Receive();
+    }
+
+    public override bool IsEndOfData() {
+        return fax.IsEndOfData();
     }
 }
