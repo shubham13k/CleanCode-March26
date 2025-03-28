@@ -1,0 +1,12 @@
+D:\TDDCS\base\TddTemplateEngine\TemplateEngine\bin\Debug\net8.0\TemplateEngine.deps.json
+D:\TDDCS\base\TddTemplateEngine\TemplateEngine\bin\Debug\net8.0\TemplateEngine.dll
+D:\TDDCS\base\TddTemplateEngine\TemplateEngine\bin\Debug\net8.0\TemplateEngine.pdb
+D:\TDDCS\base\TddTemplateEngine\TemplateEngine\obj\Debug\net8.0\TemplateEngine.GeneratedMSBuildEditorConfig.editorconfig
+D:\TDDCS\base\TddTemplateEngine\TemplateEngine\obj\Debug\net8.0\TemplateEngine.AssemblyInfoInputs.cache
+D:\TDDCS\base\TddTemplateEngine\TemplateEngine\obj\Debug\net8.0\TemplateEngine.AssemblyInfo.cs
+D:\TDDCS\base\TddTemplateEngine\TemplateEngine\obj\Debug\net8.0\TemplateEngine.csproj.CoreCompileInputs.cache
+D:\TDDCS\base\TddTemplateEngine\TemplateEngine\obj\Debug\net8.0\TemplateEngine.sourcelink.json
+D:\TDDCS\base\TddTemplateEngine\TemplateEngine\obj\Debug\net8.0\TemplateEngine.dll
+D:\TDDCS\base\TddTemplateEngine\TemplateEngine\obj\Debug\net8.0\refint\TemplateEngine.dll
+D:\TDDCS\base\TddTemplateEngine\TemplateEngine\obj\Debug\net8.0\TemplateEngine.pdb
+D:\TDDCS\base\TddTemplateEngine\TemplateEngine\obj\Debug\net8.0\ref\TemplateEngine.dll
