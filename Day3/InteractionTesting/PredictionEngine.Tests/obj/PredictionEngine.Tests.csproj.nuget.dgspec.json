@@ -1,0 +1,231 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\TDDCS\\base\\InteractionTesting\\PredictionEngine.Tests\\PredictionEngine.Tests.csproj": {}
+  },
+  "projects": {
+    "D:\\TDDCS\\base\\InteractionTesting\\LanguageModelAlgo\\LanguageModelAlgo.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\TDDCS\\base\\InteractionTesting\\LanguageModelAlgo\\LanguageModelAlgo.csproj",
+        "projectName": "LanguageModelAlgo",
+        "projectPath": "D:\\TDDCS\\base\\InteractionTesting\\LanguageModelAlgo\\LanguageModelAlgo.csproj",
+        "packagesPath": "C:\\Users\\z004wwes\\.nuget\\packages\\",
+        "outputPath": "D:\\TDDCS\\base\\InteractionTesting\\LanguageModelAlgo\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\z004wwes\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "\\\\ushesb0na00nas.ad005.onehc.net\\tfs_repository$\\NuGet\\packages": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\TDDCS\\base\\InteractionTesting\\PredictionEngine.Tests\\PredictionEngine.Tests.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\TDDCS\\base\\InteractionTesting\\PredictionEngine.Tests\\PredictionEngine.Tests.csproj",
+        "projectName": "PredictionEngine.Tests",
+        "projectPath": "D:\\TDDCS\\base\\InteractionTesting\\PredictionEngine.Tests\\PredictionEngine.Tests.csproj",
+        "packagesPath": "C:\\Users\\z004wwes\\.nuget\\packages\\",
+        "outputPath": "D:\\TDDCS\\base\\InteractionTesting\\PredictionEngine.Tests\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\z004wwes\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "\\\\ushesb0na00nas.ad005.onehc.net\\tfs_repository$\\NuGet\\packages": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "D:\\TDDCS\\base\\InteractionTesting\\LanguageModelAlgo\\LanguageModelAlgo.csproj": {
+                "projectPath": "D:\\TDDCS\\base\\InteractionTesting\\LanguageModelAlgo\\LanguageModelAlgo.csproj"
+              },
+              "D:\\TDDCS\\base\\InteractionTesting\\PredictionEngine\\PredictionEngine.csproj": {
+                "projectPath": "D:\\TDDCS\\base\\InteractionTesting\\PredictionEngine\\PredictionEngine.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[17.6.0, )"
+            },
+            "Moq": {
+              "target": "Package",
+              "version": "[4.20.69, )"
+            },
+            "NUnit": {
+              "target": "Package",
+              "version": "[3.13.3, )"
+            },
+            "NUnit.Analyzers": {
+              "target": "Package",
+              "version": "[3.6.1, )"
+            },
+            "NUnit3TestAdapter": {
+              "target": "Package",
+              "version": "[4.2.1, )"
+            },
+            "coverlet.collector": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\TDDCS\\base\\InteractionTesting\\PredictionEngine\\PredictionEngine.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\TDDCS\\base\\InteractionTesting\\PredictionEngine\\PredictionEngine.csproj",
+        "projectName": "PredictionEngine",
+        "projectPath": "D:\\TDDCS\\base\\InteractionTesting\\PredictionEngine\\PredictionEngine.csproj",
+        "packagesPath": "C:\\Users\\z004wwes\\.nuget\\packages\\",
+        "outputPath": "D:\\TDDCS\\base\\InteractionTesting\\PredictionEngine\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\z004wwes\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "\\\\ushesb0na00nas.ad005.onehc.net\\tfs_repository$\\NuGet\\packages": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "D:\\TDDCS\\base\\InteractionTesting\\LanguageModelAlgo\\LanguageModelAlgo.csproj": {
+                "projectPath": "D:\\TDDCS\\base\\InteractionTesting\\LanguageModelAlgo\\LanguageModelAlgo.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
